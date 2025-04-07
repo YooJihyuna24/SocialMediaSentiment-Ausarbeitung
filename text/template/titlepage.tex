@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 2020-06-20
+%% Descr:       Titelseite
+%% Author:      Vorlage erstellt von Daniel Spitzer an der DHBW Lörrach 
+%% Angepasst:   Katja Wengler, ZWI, DHBW Karlsruhe
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace*{-3cm}
+
+\begin{center}
+
+\includegraphics[width=6cm]{DHBW_logo.pdf}
+
+\vspace{4cm}
+\Large Fakultät Wirtschaft\\
+
+\vspace{2cm}
+\Large Studiengang \courseOfStudies \\
+
+\fontsize{\titleFontSize}{\titleFontSize}\selectfont \thesisTitle \\
+
+\vspace{1cm}
+\thesisType \\
+
+\normalsize Im Rahmen der Prüfung zum \degree \\
+
+\ifblockingnotice
+\vspace{0.5cm}
+\Large \textcolor{red}{Sperrvermerk}\\
+\vspace{0.5cm}
+\else
+\vspace{2cm}
+\fi 
+
+\submissionDate \\
+\vfill
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|c|X|}
+        Verfasser:innen: & \name \\
+        Kurs: & \course \\
+        % Dualer Partner: & \company, \companyLocation \\
+        \ifseminararbeit
+        \else 
+        Betreuer: & \corporateAdvisor \\ 
+        \fi
+        Wissenschaftliche:r Betreuer:in: & \universityAdvisor \\ 
+        Abgabedatum: & \submissionDate \\
+    \end{tabularx}
+\end{center}
+    

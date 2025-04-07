@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 2020-06-20
+%% Descr:       Hauptdatei für die Projektarbeit / Bachelorarbeit
+%% Author:      Vorlage erstellt von Daniel Spitzer an der DHBW Lörrach 
+%% Angepasst: Katja Wengler, ZWI, DHBW Karlsruhe
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newif\ifseminararbeit
+\newif\ifblockingnotice
+\input{config}
+\input{text/template/preamble}
+
+\begin{document}
+\thispagestyle{empty}
+\input{text/template/titlepage}
+\pagenumbering{Roman}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\footer}
+\newpage
+\input{text/template/declaration}
+\newpage
+
+\ifblockingnotice
+\input{text/template/blockingNotice}
+\newpage
+\fi
+
+% \input{text/abstract}
+% \newpage
+
+\tableofcontents
+\newpage
+
+\input{text/acronym}
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+\clearpage
+\setcounter{pageNumber}{\value{page}}
+\pagenumbering{arabic}
+
+\rowcolors{1}{tableOdd}{tableEven}
+
+% -----------------------------------------------------
+% Hier sind die Kapitel.
+% Bei Bedarf kann man Kapitel entfernen oder hinzufügen
+\input {text/1_zielsetzung.tex}
+\newpage
+\input{text/2_projektschritte.tex}
+\newpage
+\input{text/3_methoden.tex}
+\newpage
+\input{text/4_ergebnisse.tex}
+\newpage
+\input{text/5_handlungsempfehlungen.tex}
+% -----------------------------------------------------
+
+\label{pagesForDeclaration}
+
+\clearpage
+\pagenumbering{Roman}
+\setcounter{page}{\value{pageNumber}}
+
+\input{text/template/references}
+\newpage
+
+\input{text/appendix}
+
+\end{document}
