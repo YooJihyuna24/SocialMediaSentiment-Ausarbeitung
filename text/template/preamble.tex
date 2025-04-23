@@ -49,13 +49,12 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0.5pt}
 \def \footer{
-\begin{center}
-\hfill
+{\centering
 \fontsize{\footerFontSize}{\footerFontSize}\selectfont%\thesisFooterTitle
-\hfill
-\thepage
-\end{center}
+\thepage\par}
 }
+
+
 
 % Positioniert die Fußnoten fest am unteren Ende der Seite
 \usepackage[bottom]{footmisc}
