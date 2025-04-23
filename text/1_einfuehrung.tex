@@ -1,43 +1,17 @@
-\section{Einführung}
+\section{Einleitung}
 
-\subsection{Problemstellung}
-Das Projekt befasst sich mit der Sentiment-Analyse von Social-Media-Posts, die aus einem Kaggle-Datensatz stammen und sich auf psychische Gesundheit konzentrieren. Es gibt sieben y-Variablen: Normal, Depression, Suizidalität, Angst, Stress, Bipolarität und Persönlichkeitsstörungen. Zunächst wird eine umfassende Datenvorverarbeitung durchgeführt, einschließlich der manuellen Bereinigung, gefolgt von Modelltraining und -evaluierung. Am Ende des Projekts soll ein robustes Klassifikationsmodell für die Vorhersage von psychischen Gesundheitszuständen vorliegen.
+\subsection{Ausgangssituation und Motivation}
+Die zunehmende Bedeutung sozialer Medien als Meinungsplattformen birgt Potenziale für datengetriebene Analysen öffentlicher Stimmungen. Unternehmen und Organisationen benötigen Werkzeuge, um relevante Diskussionen frühzeitig zu erkennen und einzuordnen. Technisch erfordert dies robuste Schnittstellen zu Plattformen wie Reddit sowie Methoden zur automatisierten Sprachverarbeitung (\emph{NLP} = Natural Language Processing).
 
-\subsection{Input- und Output-Variablen}
+\subsection{Projektidee und Anwendungsfall}
+Ziel dieses Projekts ist die Entwicklung eines webbasierten Dashboards zur Analyse von Sentiment-Daten aus Reddit-Foren. Als Use Case dient die kontinuierliche Beobachtung gesellschaftlicher Diskurse, etwa in Bereichen wie Mental Health oder Produktfeedback. Die Anwendung richtet sich an Forschende, Journalist:innen oder Organisationen mit Interesse an digitalen Meinungsbildern.
+
+\subsection{SMART-Ziele}
+Das Projekt verfolgt klar definierte SMART-Ziele:
 \begin{itemize}
-    \item \textbf{Input-Variablen:} Die Eingabedaten bestehen aus unstrukturierten Texten, die Aussagen oder Fragen zu psychischen Gesundheitszuständen darstellen. Die Texte werden als Feature für das Modell verwendet, das daraufhin eine Vorhersage trifft.
-
-    \item \textbf{Output-Variable:} Die Zielvariable ist das Sentiment des jeweiligen Textes, welches in eine der folgenden Kategorien unterteilt wird:
-        \begin{itemize}
-            \item Normal
-            \item Depression
-            \item Suizidalität
-            \item Angst
-            \item Stress
-            \item Bipolarität
-            \item Persönlichkeitsstörungen
-        \end{itemize}
-    \end{itemize}
-
-\subsection{Prediction vs. Inference}
-\begin{itemize}
-    \item \textbf{Prediction:} Die Hauptfrage im Rahmen dieses Projekts ist: \textit{„Welches Sentiment hat dieser Kommentar?“}. Das Modell wird darauf trainiert, das Sentiment eines gegebenen Textes vorherzusagen.
-
-    \item \textbf{Inference:} Im Gegensatz zur Vorhersage geht es hier um das Verständnis von Mustern. Eine mögliche Fragestellung könnte sein: \textit{„Welche Wörter oder Phrasen korrelieren mit einem negativen Sentiment bzw. einem negativen Mental Health Status?“}.
+    \item \textbf{Specific:} Entwicklung eines interaktiven Dashboards mit API-Anbindung und Sentimentanalyse.
+    \item \textbf{Measurable:} Integration und Vergleich von Machine Learning-Modellen zur Sentimentanalyse; Visualisierung von (KPIs) Key Performance Indicators.
+    \item \textbf{Achievable:} Bereitstellung einer benutzerfreundlichen Oberfläche.
+    \item \textbf{Realistic:} Umsetzung im Rahmen eines studentischen Projekts.
+    \item \textbf{Time-Bound:} Abgabe der lauffähigen Anwendung mit umfassender Dokumentation bis 2025.04.23.
 \end{itemize}
-
-\subsection{Klassifikation vs. Regression}
-Da es sich bei der Zielvariable um eine kategorische Ausgabe handelt (Normal, Depression, Suizidalität, Angst, Stress, Bipolarität und Persönlichkeitsstörungen), handelt es sich um ein \textbf{Klassifikationsproblem}. Das Ziel ist es, die Texte in eine der sieben Kategorien einzuordnen.
-
-\subsection{Zielsetzung und Methodik}
-Das Ziel dieses Projekts ist es, mithilfe des CRISP-DM-Modells die Sentiment-Analyse zu optimieren und das Modell mit manueller Datenvorverarbeitung zu trainieren. Die verschiedenen Schritte des Projekts umfassen:
-\begin{enumerate}
-    \item Datenvorverarbeitung, einschließlich der Entfernung von Stoppwörtern und der Anwendung von Lemmatization.
-    \item Implementierung eines Modells zur Sentiment-Analyse basierend auf den vorverarbeiteten Textdaten.
-    \item Evaluierung des Modells und Optimierung der Vorhersagen.
-\end{enumerate}
-
-\newpage
-
-\subsection{Abgrenzung des Projekts}
-In diesem Projekt wird bewusst auf die Nutzung automatisierter Bibliotheken wie NLTK für die Textvorverarbeitung verzichtet. Stattdessen wird eine manuelle Vorverarbeitung durchgeführt, um ein besseres Verständnis der Daten und der Modellentwicklung zu erlangen. Das Projekt wird im Rahmen des CRISP-DM-Prozesses durchgeführt, wobei der Fokus auf der Datenvorbereitung und Modelltraining liegt.
