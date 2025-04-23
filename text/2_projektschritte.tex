@@ -1,0 +1,54 @@
+\section{Erläuterung der Projektschritte}
+
+\subsection{Datenanbindung \&~Vorbereitung}
+
+\subsubsection{API-Grundlagen}
+Eine REST-API (Representational State Transfer) ermöglicht
+den strukturierten Abruf von Daten über das HTTP-Protokoll.
+Dabei werden sogenannte HTTP-Verben wie \texttt{GET} oder \texttt{POST} verwendet, um Inhalte vom Server zu lesen oder neue zu senden.
+Die meisten modernen APIs – darunter auch jene von Reddit – nutzen \texttt{JSON} als Austauschformat.
+Ein API-Endpunkt wie beispielsweise \texttt{r/\{subreddit\}/comments} liefert die Kommentarstruktur eines Subreddits.
+Jede Anfrage muss dabei autorisiert werden, meist über das OAuth2-Verfahren mit einer eindeutigen \texttt{CLIENT\_ID} und einem \texttt{CLIENT\_SECRET}.
+Zusätzlich beschränken sogenannte Rate-Limits die Anzahl der Anfragen pro Zeiteinheit; bei zu vielen Zugriffen antwortet der Server mit einem Fehlercode wie \texttt{HTTP 429} („Too Many Requests“).
+
+\subsubsection{PRAW: Python Reddit API Wrapper}
+\texttt{PRAW} ist ein objektorientierter Wrapper für die Reddit-API, der die Kommunikation mit dem Server stark vereinfacht.
+Anstatt manuell URLs zu erstellen und \texttt{JSON}-Antworten zu analysieren, arbeitet man direkt mit Python-Objekten wie \texttt{Subreddit}, \texttt{Submission} oder \texttt{Comment}.
+Diese bieten intuitive Methoden wie \texttt{.top()} oder \texttt{.comments()}, um Inhalte gezielt zu durchsuchen.
+Diese Abstraktion erhöht die Lesbarkeit des Codes erheblich, reduziert potenzielle Fehlerquellen und erlaubt einen deutlich schnelleren Entwicklungsfluss.
+Zusätzlich ist \texttt{PRAW} aktiv gepflegt, umfassend dokumentiert und in der Community weit verbreitet.
+
+\subsubsection{Authentifizierung \&~Umgebungsvariablen}
+Zur sicheren Handhabung sensibler Zugangsdaten wird die Bibliothek \texttt{dotenv} verwendet.
+Diese lädt Werte wie \texttt{CLIENT\_ID} und \texttt{CLIENT\_SECRET} aus einer externen Datei und schützt sie so vor versehentlicher Veröffentlichung im Code.
+Die initiale Verbindung zur Reddit-API erfolgt über die Funktion \texttt{initialize\_reddit\_connection()}, die prüft, ob alle benötigten Informationen vollständig vorliegen.
+Bei fehlenden Angaben wird eine aussagekräftige Fehlermeldung ausgegeben.
+
+\subsubsection{Datenvorverarbeitung mit \texttt{data\_processor.py}}
+Nach dem Abruf der Daten aus Reddit, \newline
+beispielsweise mit der Funktion \texttt{get\_submissions\_text()}, liegen diese als einfache Zeichenketten vor.
+Um die Texte analysierbar zu machen, erfolgt zunächst eine Bereinigung durch \texttt{clean\_up\_text()}, bei der Links, Benutzernamen und überflüssige Leerzeichen entfernt werden.
+Die so vorbereiteten Daten durchlaufen anschließend eine Sentiment-Analyse \newline
+mit Hilfe der \texttt{TextClassificationPipeline} von HuggingFace.
+Diese weist jedem Beitrag ein Stimmungslabel zu.
+Abschließend werden mit einem \texttt{Counter} die Häufigkeiten der jeweiligen Stimmungen aggregiert und für die Visualisierung im Dashboard vorbereitet.
+
+\subsubsection{Caching \&~Session-State}
+Um bei der Verwendung des Dashboards wiederholte API-Aufrufe und Rechenoperationen zu vermeiden, nutzt Streamlit zwei Formen des Cachings.
+Langlebige Ressourcen wie die Reddit-Verbindung oder die Sentiment-Pipeline werden mit dem Dekorator \texttt{@st.cache\_resource} gespeichert.
+Dynamischere Inhalte wie etwa die abgerufenen Beiträge oder Kommentare werden mit \texttt{@st.cache\_data} behandelt.
+Darüber hinaus lassen sich mit dem Objekt \texttt{st.session\_state} benutzerspezifische Einstellungen, beispielsweise die gewählte Analysepipeline oder die Anzahl der Beiträge, dauerhaft über die Sitzung hinweg speichern.
+Das erlaubt eine reibungslose und performante Nutzung interaktiver Komponenten im Dashboard.
+
+\subsection{Testing}
+Zur Sicherstellung der Funktionsfähigkeit und Wartbarkeit unseres Codes \newline
+verfolgen wir eine zweigleisige Teststrategie: Einerseits werden \emph{Unit-Tests} eingesetzt, um einzelne Funktionen isoliert zu prüfen; andererseits ergänzen \emph{Integrationstests} die Testabdeckung durch das Zusammenspiel mehrerer Komponenten. Externe Abhängigkeiten wie die Reddit-API oder die Sentiment-Analyse-Pipeline von HuggingFace werden dabei mit Hilfe von \texttt{unittest.mock.MagicMock} simuliert, um stabile und deterministische Tests zu ermöglichen.
+
+Beispielsweise \texttt{test\_reddit.py},\newline
+wo Funktionen wie \texttt{get\_subreddit\_subscriber\_count()}\newline
+und \texttt{get\_top\_submission\_url()} gegen einen simulierten Reddit-Zugriff getestet werden. Die Rückgabeobjekte wie \texttt{Submission} oder \texttt{Subreddit} werden dabei über Mocks erzeugt, sodass etwa die Methode \texttt{top()} eine Testsubmission liefert. Der Test prüft anschließend, ob die korrekte Abonnentenzahl oder eine gültige URL erzeugt wurde.
+
+Auch die Vorverarbeitung wird getestet,\newline
+wie etwa in \texttt{test\_sentiment\_analyzer.py}: Die Funktion \texttt{clean\_up\_text()} entfernt zuverlässig unerwünschte Bestandteile wie Links und Erwähnungen. Durch gezielte Eingabebeispiele wird das Verhalten dieser Funktion abgesichert.
+
+Auf diese Weise stellen wir sicher, dass zentrale Datenflüsse und Analysebausteine unseres Dashboards auch bei Veränderungen im Code verlässlich funktionieren.
