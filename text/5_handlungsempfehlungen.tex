@@ -1,1 +1,12 @@
-\section{Abgeleitete Handlungsempfehlungen}
+\section{Handlungsempfehlungen \&~Erkenntnisse}
+\label{sec:erkenntnisse}
+
+\subsection{Weiterentwicklung und Verbesserungspotenzial}
+Obwohl das entwickelte Dashboard eine funktionale Grundlage zur Analyse von Reddit-Inhalten bietet, existieren vielfältige Möglichkeiten zur Erweiterung. Eine zentrale Weiterentwicklung wäre die persistente Speicherung der Daten in einer Datenbank. Dadurch könnten historische Beiträge systematisch archiviert und in zeitlichen Intervallen analysiert werden. Langfristige Trends in Stimmungslagen oder Themenhäufigkeiten würden so erst sichtbar. Auch eine Benutzerverwaltung oder individuelle Suchprofile wären denkbar. Derartige Funktionalitäten würden jedoch eine deutlich komplexere Architektur, zusätzliche Infrastruktur (z.\,B. Datenbanksysteme) und erweitertes Monitoring erfordern und hätten somit den gegebenen Projektumfang gesprengt.
+
+\subsection{Einsatzszenarien und Nutzen in der Praxis}
+Das Dashboard eignet sich besonders für Institutionen oder Organisationen, die Social Media als Informationsquelle nutzen. Beispielsweise könnten Gesundheitsämter, Medienhäuser oder NGOs aktuelle Stimmungslagen zu gesellschaftlichen Themen identifizieren oder frühzeitig Diskussionsverläufe erkennen. Unternehmen können hier wertvolle Einblicke in Nutzermeinungen, Trends und Feedback gewinnen. Das Dashboard ermöglicht es, Stimmungen und Themen in Echtzeit zu analysieren, was auch für die Bereiche von Marketing und Produktentwicklung von Bedeutung ist.
+Auch die Analyse spezifischer Communities – etwa Subreddits zu psychischer Gesundheit – liefert wertvolle Einblicke in Bedürfnisse, Sorgen oder Stimmungen der Nutzer. Mit geringem Konfigurationsaufwand lässt sich das Dashboard an unterschiedliche Themenbereiche anpassen und bietet so einen flexiblen Einsatzrahmen.
+
+\subsection{Technische Lessons Learned}
+Im Verlauf des Projekts konnte das Team wichtige Erfahrungen im Umgang mit API-Schnittstellen, Authentifizierung und Caching sammeln. Die Verwendung von \texttt{PRAW} vereinfachte den Zugang zur Reddit-API erheblich, stellte jedoch Anforderungen an ein sauberes Fehlermanagement und stabile Internetverbindungen. Auch der gezielte Einsatz von \texttt{@st.cache\_data} und \texttt{@st.cache\_resource} erforderte ein Verständnis für Datenfluss und Nutzerinteraktionen in Streamlit. Rückblickend wäre eine frühzeitigere Definition gemeinsamer Code-Konventionen sowie eine stringente Testabdeckung hilfreich gewesen, um Entwicklungszeit zu sparen und potenzielle Fehlerquellen frühzeitig zu identifizieren.
