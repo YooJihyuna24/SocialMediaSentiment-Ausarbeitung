@@ -14,17 +14,12 @@ Zusammenfassend lässt sich sagen, dass die Kombination aus agiler Aufgabenverwa
 \subsection{Einsatz von Streamlit zur Visualisierung}
 
 Für die Entwicklung der grafischen Benutzeroberfläche wurde Streamlit gewählt. Dabei handelt es sich um ein Open-Source-Framework in Python, das es ermöglicht, schnell und einfach interaktive Webanwendungen für Data-Science-Projekte zu erstellen. Die Entscheidung fiel auf Streamlit insbesondere aufgrund der einfachen Integration in den Python-Workflow. Zudem benötigt Streamlit keine zusätzliche Frontend-Programmierung in HTML, CSS und JavaScript. Dies erlaubt eine schnelle Entwicklung interaktiver Prototypen direkt aus Python heraus. 
-% quelle angeben (https://books.google.de/books?hl=de&lr=&id=9804EAAAQBAJ&oi=fnd&pg=PP1&dq=streamlit+python&ots=qnjx6HTG5U&sig=EDPBi2yHX6VOzYcDUc2AWwsJUU0#v=onepage&q=streamlit%20python&f=false Seite 4-5??) % 
+
 Mit der Funktion \verb|@st.set_page_config()| wird in der main.py die Initialkonfiguration der Webanwendung vorgenommen. Sie wird am Anfang des Codes aufgerufen und ermöglicht es die grundlegenden Eigenschaften der Webanwendung festzulegen. \\ % wie oft die doku einbinden von streamlit ? % 
 Ein weiteres wichtiges Element ist die durch \verb|@st.navigation()| implementierte Seitenstruktur. Diese erlaubt es, das Subreddit-Dashboard und das Posts-Dashboard als separate Seiten in die Anwendung zu integrieren. Durch diese modulare Struktur bleibt die Anwendung auch bei wachsender Funktionalität benutzerfreundlich und übersichtlich.
 Entscheidend für die Performance der Streamlit-Anwendung ist der Einsatz mit den Caching-Funktionen \verb|@st.cache_data & st.cache_ressource|. Da Streamlit das gesamte Skript bei jeder Nutzerinteraktion potenziell neu ausführt, würden ohne Caching rechenintensive Operationen wie API-Abfragen oder das Laden von Machine-Learning-Modellen wiederholt durchgeführt. Somit werden die Caching-Funktionen von Streamlit in dem Projekt genutzt, um die Ergebnisse von Aufrufen zwischenzuspeichern. Dies verringert nicht nur die Latenz, sondern schont zudem die API-Rate-Limits von Reddit.
 
 Im Gegensatz zu anderen Dashboardsystemen wie Dash oder Bokeh ist der initiale Konfigurationsaufwand bei Streamlit deutlich geringer, wodurch es sich besonders gut für dieses Projekt eignet. (zitat heaven2021) 
 Ein weiterer Vorteil ist die stetig ansteigende Anzahl an Community-Komponenten und Drittanbieter-Integration, wodurch sich auch komplexere Visualisierungen (z.\,B.\ über Plotly oder WordCloud) nahtlos einbinden lassen, wie im weiteren Verlauf des Projekts zu sehen sein wird. 
-
-
-%Reaktives Interface durch Caching: Durch die Verwendung von \verb|@st.cache_data| und \verb|@st.cache_resource| können API-Anfragen und Modellinitialisierungen effizient wiederverwendet werden.
- 
-
 
 Diese Merkmale machen Streamlit zu einem geeigneten Werkzeug für datengestützte Projekte, bei denen der Fokus auf schneller Umsetzung und einfacher Bedienbarkeit liegt.
