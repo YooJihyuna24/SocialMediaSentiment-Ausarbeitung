@@ -95,9 +95,10 @@ Die manuelle Vorverarbeitung der Social-Media-Posts erfolgte in mehreren Stufen:
     \item \textbf{Kleinschreibung:}
     
     Im ersten Schritt der Textvorverarbeitung wurden alle Zeichen der Textvariable in Kleinbuchstaben umgewandelt, um die Konsistenz der Token zu gewährleisten und Redundanzen durch unterschiedliche Groß- und Kleinschreibung zu vermeiden:
-        \begin{lstlisting}[language=Python, caption={Umwandlung in Kleinschreibung}]
-        df["statement"] = df["statement"].str.lower()
-        \end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Umwandlung in Kleinschreibung}]
+df["statement"] = df["statement"].str.lower()
+\end{lstlisting}
 
     \item \textbf{Regex-Cleaning:}
     
@@ -105,34 +106,34 @@ Die manuelle Vorverarbeitung der Social-Media-Posts erfolgte in mehreren Stufen:
     
     Die folgenden Python-Befehle illustrieren den Ablauf und sind Beispiele aus dem Code. Für eine vollständige Liste der verwendeten Regex-Befehle siehe das Jupyter-Notebook im Anhang.
 
-        \begin{lstlisting}[language=Python, caption={Regex-Cleaning der Social-Media-Texte}]
-        
-            # Entfernen von URLs
-            df["statement"] = df["statement"].str.replace(r"https?://\S+|www\.\S+", "", regex=True)
+\begin{lstlisting}[language=Python, caption={Regex-Cleaning der Social-Media-Texte}]
 
-            # Entfernen von mentions
-            df["statement"] = df["statement"].str.replace(r"@\w+", "", regex=True)
+# Entfernen von URLs
+df["statement"] = df["statement"].str.replace(r"https?://\S+|www\.\S+", "", regex=True)
 
-            # Entfernen von HTML-Entities und Zero-Width Characters (z.B., "&#x27;", "\u200b")
-            df["statement"] = df["statement"].str.replace(r'&#x[0-9a-fA-F]+;|\u200b', '', regex=True)
-        \end{lstlisting}
+# Entfernen von mentions
+df["statement"] = df["statement"].str.replace(r"@\w+", "", regex=True)
+
+# Entfernen von HTML-Entities und Zero-Width Characters (z.B., "&#x27;", "\u200b")
+df["statement"] = df["statement"].str.replace(r'&#x[0-9a-fA-F]+;|\u200b', '', regex=True)
+\end{lstlisting}
 
     \item \textbf{Stopword-Entfernung:}
 
 Zur Reduktion nicht-informativer Wörter wurden sogenannte \textit{Stopwords} entfernt. Hierzu wurde die englische Stopword-Liste aus der Bibliothek \texttt{nltk} verwendet. Jedes Token wurde überprüft und bei Übereinstimmung mit einem Eintrag der Stopword-Liste entfernt:
 
-    \begin{lstlisting}[language=Python, caption={Entfernung englischer Stopwords mit nltk}]
-        import nltk
-        from nltk.corpus import stopwords
+\begin{lstlisting}[language=Python, caption={Entfernung englischer Stopwords mit nltk}]
+import nltk
+from nltk.corpus import stopwords
 
-        nltk.download('stopwords')
-        stop_words = set(stopwords.words('english'))
+nltk.download('stopwords')
+stop_words = set(stopwords.words('english'))
 
-        def remove_stopwords(text):
-            return ' '.join([word for word in text.split() if word.lower() not in stop_words])
+def remove_stopwords(text):
+    return ' '.join([word for word in text.split() if word.lower() not in stop_words])
 
-        df["statement"] = df["statement"].apply(remove_stopwords)
-    \end{lstlisting}
+df["statement"] = df["statement"].apply(remove_stopwords)
+\end{lstlisting}
 
 Nach Abschluss der Vorverarbeitung wurde der Korpus deutlich reduziert:
 
@@ -140,12 +141,12 @@ Er umfasst nun 2.717.728 Wortvorkommen (\textit{word instances}) und 76.395 unte
 
 Diese Reduktion verdeutlicht den Effekt der Reinigungs- und Filterprozesse auf die sprachliche Komplexität des Datensatzes. Obwohl der bereinigte Korpus nun ausschließlich relevante Terme enthält, bleibt die Anzahl der Worttypen hoch. Daher wird im nächsten Schritt eine weiterführende Tokenisierung eingesetzt, um die lexikalische Vielfalt weiter zu verringern.
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.75\textwidth]{images/new_word_frequencies.png}
-        \caption{Verteilung der Wortinstanzen und -typen nach Bereinigung}
-        \label{fig:newwordfreq}
-    \end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/new_word_frequencies.png}
+    \caption{Verteilung der Wortinstanzen und -typen nach Bereinigung}
+    \label{fig:newwordfreq}
+\end{figure}
 
     \item \textbf{Tokenisierung:}
     
@@ -153,20 +154,20 @@ Zerlegung der bereinigten Texte in einzelne Token durch Leerzeichentrennung
 
 mittels \verb|.split()| oder mit regulären Ausdrücken:
 
-        \begin{lstlisting}[language=Python, caption={Tokenisierung mittels Regex}]
-            tokens = re.findall(r"\w+", text)
-        \end{lstlisting}
+\begin{lstlisting}[language=Python, caption={Tokenisierung mittels Regex}]
+    tokens = re.findall(r"\w+", text)
+\end{lstlisting}
 
     \item \textbf{weitere Visualisierung:}
     
     Zur explorativen Analyse des Korpus wurde eine Wordcloud erstellt, welche die häufigsten Begriffe aus der \texttt{statement}-Spalte visuell hervorhebt. Dabei werden besonders häufig vorkommende Wörter größer dargestellt, während seltenere Begriffe kleiner erscheinen. Diese Form der Visualisierung erlaubt einen schnellen Überblick über zentrale Themen und sprachliche Muster im Datensatz. Zusätzlich wurden Wordclouds für verschiedene \texttt{status}-Kategorien generiert, um potenzielle Unterschiede in der Wortwahl zwischen den Klassen zu erkennen.
 
-        \begin{figure}[h]
-            \centering
-            \includegraphics[width=0.75\textwidth]{images/wordcloud.png}
-            \caption{Wordclouds für verschiedene \texttt{status}-Kategorien}
-            \label{fig:wordcloud}
-        \end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\textwidth]{images/wordcloud.png}
+\caption{Wordclouds für verschiedene \texttt{status}-Kategorien}
+\label{fig:wordcloud}
+\end{figure}
 
 \end{enumerate}
 
