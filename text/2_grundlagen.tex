@@ -1,1 +1,35 @@
 \section{Grundlagen}
+%Dieses Kapitel könnte auch weg. Habe es vorsichtshalber drin gelassen.
+\subsection{CRISP-DM und NLP–Pipeline}
+Das Projekt folgt dem etablierten CRISP–DM–Modell, welches einen iterativen sechs­phasigen Prozess zur Lösung datengetriebener Aufgaben definiert:
+\begin{enumerate}
+    \item \textbf{Business Understanding}: Festlegung der Projektziele und Anforderungen.
+    \item \textbf{Data Understanding}: Explorative Analyse der Rohdaten.
+    \item \textbf{Data Preparation}: Aufbereitung und Transformation der Daten.
+    \item \textbf{Modeling}: Anwendung verschiedener Machine–Learning–Algorithmen.
+    \item \textbf{Evaluation}: Bewertung der Modellgüte anhand geeigneter Metriken.
+    \item \textbf{Deployment}: Einsatz des finalen Modells zur produktiven Nutzung.
+\end{enumerate}
+Im Kontext der Sentiment–Analyse umfasst die NLP–Pipeline im Wesentlichen die Schritte:
+\begin{itemize}
+    \item Rohtextaufnahme und \emph{Cleaning} mittels regulärer Ausdrücke.
+    \item Tokenisierung der Textdaten.
+    \item Erzeugung numerischer Feature–Repräsentationen.
+    \item Training und Test des Klassifikationsmodells.
+    \item Bewertung und Interpretation der Vorhersagen.
+\end{itemize}
+
+\newpage
+
+\subsection{Klassische Machine–Learning–Verfahren}
+Für die Sentiment–Klassifikation wurden drei etablierte Algorithmen verglichen:
+\begin{description}
+    \item[K–Nearest Neighbors (KNN)]  
+    Vergibt Labels basierend auf den $k$ nächsten Trainingsinstanzen. Wichtige Parameter: \texttt{n\_neighbors}, Distanzmetrik.
+    \item[Decision Trees]  
+    Hierarchische Partitionierung des Merkmalsraums. Splits erfolgen nach Gini–Impurity oder Entropie. Parameter: \texttt{max\_depth}, \texttt{min\_samples\_split}.
+    \item[Random Forest]  
+    Ensemble aus zufällig erzeugten Decision Trees, welches Overfitting reduziert und robustere Vorhersagen ermöglicht.
+    
+    Parameter: \texttt{n\_estimators}, \texttt{max\_depth}.
+\end{description}
